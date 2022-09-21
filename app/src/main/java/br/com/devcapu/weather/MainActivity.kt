@@ -5,8 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement.SpaceBetween
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -29,131 +30,136 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WeatherTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background) {
-                    Greeting()
-                }
-            }
+            WeatherTheme { MainScreen() }
         }
     }
 }
 
 @Composable
-fun Greeting() {
+fun MainScreen() {
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text("São Paulo")
-                },
-                actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Filled.Search, contentDescription = null)
-                    }
-                    IconButton(onClick = {}) {
-                        Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
-                    }
-                },
-                backgroundColor = Color.Transparent,
-                elevation = 0.dp
-            )
-        }
+        backgroundColor = Color(0xFFF5F6F8),
+        topBar = { AppBar() },
+        bottomBar = { BottomBar() }
+
     ) {
-        Column(
-            modifier = Modifier
-                .padding(all = 16.dp)
-                .fillMaxWidth()
-                .fillMaxHeight()
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(vertical = 16.dp),
         ) {
-            Card(
-                backgroundColor = Color(0xFF5887DD),
-                contentColor = Color.White,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
+            item {
+                Card(
+                    backgroundColor = Color(0xFF5887DD),
+                    contentColor = Color.White,
                     modifier = Modifier
-                        .padding(8.dp)
                         .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
                 ) {
-                    Image(
-                        painterResource(id = R.drawable.ic_launcher_foreground),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxWidth(0.5f)
-                    )
-
-                    Column(
-                        verticalArrangement = Arrangement.SpaceBetween,
-                        horizontalAlignment = CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
+                    Row(
+                        horizontalArrangement = SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .padding(24.dp)
+                            .fillMaxWidth()
                     ) {
-                        Text(
-                            text = "20/09/2022 | 19:30",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Medium,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                        Image(
+                            painterResource(id = R.drawable.sun),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxWidth(0.5f)
                         )
-                        Text(
-                            text = "28°C",
-                            fontSize = 32.sp,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
+
+                        Column(
+                            verticalArrangement = SpaceBetween,
+                            horizontalAlignment = CenterHorizontally,
                             modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(
+                                text = "20/09/2022 | 19:30",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Medium,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            Text(
+                                text = "28°C",
+                                fontSize = 32.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
+                }
+            }
+
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        AdditionalInformation(
+                            icon = painterResource(id = R.drawable.humidity),
+                            value = "28°C",
+                            name = "Sensação"
+                        )
+                        AdditionalInformation(
+                            icon = painterResource(id = R.drawable.rainy),
+                            value = "88%",
+                            name = "Humidade"
+                        )
+
+                        AdditionalInformation(
+                            icon = painterResource(id = R.drawable.dashboard),
+                            value = "1009 hPa",
+                            name = "Pressão do ar"
                         )
                     }
                 }
             }
 
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp)
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    AdditionalInformation(
-                        icon = painterResource(id = R.drawable.ic_launcher_foreground),
-                        value = "28°C",
-                        name = "Sensação"
-                    )
-                    AdditionalInformation(
-                        icon = painterResource(id = R.drawable.ic_launcher_foreground),
-                        value = "88%",
-                        name = "Humidade"
-                    )
-
-                    AdditionalInformation(
-                        icon = painterResource(id = R.drawable.ic_launcher_foreground),
-                        value = "1009hPa",
-                        name = "Pressão do ar"
-                    )
-                }
+            item {
+                Text(
+                    text = "Em cada horário",
+                    fontSize = 19.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                )
             }
 
-            Text(
-                text = "Em cada horário",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp)
-            )
-            LazyRow {
-                items(listOf("Bla")) {
+            item {
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
                     repeat(10) {
-                        Card(modifier = Modifier.padding(end = 16.dp)) {
-                            Column() {
-                                Text("Agora")
-                                Column {
+                        item {
+                            Card {
+                                Column(
+                                    modifier = Modifier.padding(16.dp),
+                                    verticalArrangement = SpaceBetween,
+                                    horizontalAlignment = CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "Agora",
+                                        textAlign = TextAlign.Center
+                                    )
                                     Image(
-                                        painterResource(id = R.drawable.ic_launcher_foreground),
+                                        painterResource(id = R.drawable.sun),
                                         contentDescription = null
                                     )
-                                    Text("28°C")
+                                    Text(
+                                        text = "28°C",
+                                        textAlign = TextAlign.Center
+                                    )
                                 }
                             }
                         }
@@ -165,13 +171,39 @@ fun Greeting() {
 }
 
 @Composable
+private fun BottomBar() { }
+
+@Composable
+private fun AppBar() {
+    TopAppBar(
+        title = {
+            Text(
+                text = "São Paulo",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        },
+        actions = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.Search, contentDescription = null)
+            }
+            IconButton(onClick = {}) {
+                Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
+            }
+        },
+        backgroundColor = Color.Transparent,
+        elevation = 0.dp
+    )
+}
+
+@Composable
 private fun AdditionalInformation(
     icon: Painter,
     value: String,
     name: String,
 ) {
     Column(horizontalAlignment = CenterHorizontally) {
-        Image(icon, contentDescription = null)
+        Image(icon, contentDescription = null, modifier = Modifier.padding(vertical = 16.dp))
         Text(value)
         Text(name)
     }
@@ -181,6 +213,6 @@ private fun AdditionalInformation(
 @Composable
 fun DefaultPreview() {
     WeatherTheme {
-        Greeting()
+        MainScreen()
     }
 }
