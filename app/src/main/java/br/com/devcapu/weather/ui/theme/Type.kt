@@ -2,9 +2,14 @@ package br.com.devcapu.weather.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import br.com.devcapu.weather.R
+
+
+val fontFamily = FontFamily(Font(R.font.baloo_bhai, FontWeight.Light))
 
 // Set of Material typography styles to start with
 val Typography = Typography(

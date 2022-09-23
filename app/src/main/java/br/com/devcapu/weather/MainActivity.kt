@@ -18,13 +18,17 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.devcapu.weather.ui.theme.WeatherTheme
+import br.com.devcapu.weather.ui.theme.fontFamily
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,15 +81,17 @@ fun MainScreen() {
                             Text(
                                 text = "20/09/2022 | 19:30",
                                 fontSize = 14.sp,
-                                fontWeight = FontWeight.Medium,
+                                fontWeight = FontWeight.ExtraLight,
                                 textAlign = TextAlign.Center,
+                                fontFamily = fontFamily,
                                 modifier = Modifier.fillMaxWidth()
                             )
                             Text(
                                 text = "28°C",
-                                fontSize = 32.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontSize = 40.sp,
+                                fontWeight = FontWeight.ExtraLight,
                                 textAlign = TextAlign.Center,
+                                fontFamily = fontFamily,
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
@@ -102,7 +108,7 @@ fun MainScreen() {
                     Row(
                         horizontalArrangement = SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(16.dp),
                     ) {
                         AdditionalInformation(
                             icon = painterResource(id = R.drawable.humidity),
@@ -128,41 +134,45 @@ fun MainScreen() {
                 Text(
                     text = "Em cada horário",
                     fontSize = 19.sp,
-                    fontWeight = FontWeight.SemiBold,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = 16.dp),
+                    fontFamily = fontFamily
                 )
             }
 
+            item { HourlyWeather() }
+        }
+    }
+}
+
+@Composable
+private fun HourlyWeather() {
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        repeat(10) {
             item {
-                LazyRow(
-                    contentPadding = PaddingValues(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    repeat(10) {
-                        item {
-                            Card {
-                                Column(
-                                    modifier = Modifier.padding(16.dp),
-                                    verticalArrangement = SpaceBetween,
-                                    horizontalAlignment = CenterHorizontally
-                                ) {
-                                    Text(
-                                        text = "Agora",
-                                        textAlign = TextAlign.Center
-                                    )
-                                    Image(
-                                        painterResource(id = R.drawable.sun),
-                                        contentDescription = null
-                                    )
-                                    Text(
-                                        text = "28°C",
-                                        textAlign = TextAlign.Center
-                                    )
-                                }
-                            }
-                        }
+                Card {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(20.dp),
+                        horizontalAlignment = CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Agora",
+                            textAlign = TextAlign.Center
+                        )
+                        Image(
+                            modifier = Modifier.size(64.dp),
+                            painter = painterResource(id = R.drawable.sun),
+                            contentDescription = null
+                        )
+                        Text(
+                            text = "28°C",
+                            textAlign = TextAlign.Center
+                        )
                     }
                 }
             }
