@@ -1,6 +1,7 @@
 package br.com.devcapu.weather.ui.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
