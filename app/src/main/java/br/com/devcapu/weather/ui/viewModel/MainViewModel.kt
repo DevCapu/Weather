@@ -16,7 +16,6 @@ data class MainUiState(
     val airPressure: Int = 0
 )
 
-
 class MainViewModel: ViewModel() {
 
     private val _uiState = MutableStateFlow(MainUiState())
