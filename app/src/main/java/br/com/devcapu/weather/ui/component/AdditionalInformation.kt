@@ -19,7 +19,7 @@ import br.com.devcapu.weather.ui.theme.WeatherTheme
 
 
 @Composable
-fun AdditionalInformation() {
+fun AdditionalInformation(sensation: Int, humidity: Int, airPressure: Int) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,18 +33,18 @@ fun AdditionalInformation() {
         ) {
             AdditionalInformationItem(
                 icon = painterResource(id = R.drawable.humidity),
-                value = "28°C",
+                value = "$sensation°C",
                 name = "Sensação",
             )
             AdditionalInformationItem(
                 icon = painterResource(id = R.drawable.rainy),
-                value = "88%",
+                value = "$humidity%",
                 name = "Humidade"
             )
 
             AdditionalInformationItem(
                 icon = painterResource(id = R.drawable.dashboard),
-                value = "1009 hPa",
+                value = "$airPressure hPa",
                 name = "Pressão do ar"
             )
         }
@@ -73,5 +73,11 @@ fun AdditionalInformationItem(
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun AdditionalInformationPreview() {
-    WeatherTheme { AdditionalInformation() }
+    WeatherTheme {
+        AdditionalInformation(
+            sensation = 45,
+            humidity = 50,
+            airPressure = 888
+        )
+    }
 }

@@ -21,7 +21,11 @@ import br.com.devcapu.weather.ui.theme.fontFamily
 
 
 @Composable
-fun WeatherTodayCard() {
+fun WeatherTodayCard(
+    celsius: String,
+    date: String,
+    time: String
+) {
     Card(
         backgroundColor = Color(0xFF5887DD),
         contentColor = Color.White,
@@ -48,7 +52,7 @@ fun WeatherTodayCard() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "20/09/2022 | 19:30",
+                    text = "$date | $time",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.ExtraLight,
                     textAlign = TextAlign.Center,
@@ -56,7 +60,7 @@ fun WeatherTodayCard() {
                     modifier = Modifier.fillMaxWidth()
                 )
                 Text(
-                    text = "28°C",
+                    text = "$celsius°C",
                     fontSize = 40.sp,
                     fontWeight = FontWeight.ExtraLight,
                     textAlign = TextAlign.Center,
@@ -76,6 +80,10 @@ fun WeatherTodayCard() {
 @Composable
 fun WeatherTodayCardPreview() {
     WeatherTheme {
-        WeatherTodayCard()
+        WeatherTodayCard(
+            date = "27/09/2022",
+            time = "16:20",
+            celsius = "33"
+        )
     }
 }
