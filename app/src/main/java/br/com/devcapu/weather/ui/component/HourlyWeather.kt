@@ -4,6 +4,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,23 +15,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.devcapu.weather.R
+import br.com.devcapu.weather.ui.theme.WeatherTheme
+import br.com.devcapu.weather.ui.viewModel.HourlyWeatherItem
 
 @Composable
-fun HourlyWeatherList() {
+fun HourlyWeatherList(hourlyItems: List<HourlyWeatherItem>) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        repeat(10) {
-            item {
-                HourlyWeatherCard()
-            }
-        }
-    }
+    ) { items(hourlyItems) { HourlyWeatherCard(it) } }
 }
 
 @Composable
-private fun HourlyWeatherCard() {
+private fun HourlyWeatherCard(hourlyItem: HourlyWeatherItem) {
     Card {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -38,7 +35,7 @@ private fun HourlyWeatherCard() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Agora",
+                text = hourlyItem.hour,
                 textAlign = TextAlign.Center
             )
             Image(
@@ -47,7 +44,7 @@ private fun HourlyWeatherCard() {
                 contentDescription = null
             )
             Text(
-                text = "28°C",
+                text = "${hourlyItem.celsius}°C",
                 textAlign = TextAlign.Center
             )
         }
@@ -55,15 +52,47 @@ private fun HourlyWeatherCard() {
 }
 
 @Preview(showBackground = true)
-@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Preview(
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true
+)
 @Composable
-fun HourlyWeatherListPreview() {
-    HourlyWeatherList()
+private fun HourlyWeatherListPreview() {
+    WeatherTheme {
+        HourlyWeatherList(
+            listOf(
+                HourlyWeatherItem(
+                    hour = "15:00",
+                    celsius = "23",
+                    "bla"
+                ),
+                HourlyWeatherItem(
+                    hour = "16:00",
+                    celsius = "23",
+                    "bla"
+                ),
+                HourlyWeatherItem(
+                    hour = "17:00",
+                    celsius = "23",
+                    "bla"
+                )
+            )
+        )
+    }
 }
 
 @Preview(showBackground = true)
-@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Preview(
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true
+)
 @Composable
-fun HourlyWeatherCardPreview() {
-    HourlyWeatherCard()
+private fun HourlyWeatherCardPreview() {
+    WeatherTheme {
+        HourlyWeatherCard( HourlyWeatherItem(
+            hour = "15:00",
+            celsius = "23",
+            "bla"
+        ))
+    }
 }
