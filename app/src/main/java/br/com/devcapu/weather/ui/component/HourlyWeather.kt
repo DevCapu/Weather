@@ -35,7 +35,7 @@ private fun HourlyWeatherCard(hourlyItem: HourlyWeatherItem) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = hourlyItem.hour,
+                text = "${hourlyItem.hour}h",
                 textAlign = TextAlign.Center
             )
             Image(
@@ -62,17 +62,17 @@ private fun HourlyWeatherListPreview() {
         HourlyWeatherList(
             listOf(
                 HourlyWeatherItem(
-                    hour = "15:00",
+                    hour = "15",
                     celsius = "23",
                     "bla"
                 ),
                 HourlyWeatherItem(
-                    hour = "16:00",
+                    hour = "16",
                     celsius = "23",
                     "bla"
                 ),
                 HourlyWeatherItem(
-                    hour = "17:00",
+                    hour = "17",
                     celsius = "23",
                     "bla"
                 )
@@ -90,7 +90,7 @@ private fun HourlyWeatherListPreview() {
 private fun HourlyWeatherCardPreview() {
     WeatherTheme {
         HourlyWeatherCard( HourlyWeatherItem(
-            hour = "15:00",
+            hour = "15",
             celsius = "23",
             "bla"
         ))

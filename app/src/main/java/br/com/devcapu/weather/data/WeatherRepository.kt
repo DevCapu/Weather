@@ -53,9 +53,9 @@ class WeatherRepository() {
     }
 
     private fun map(response: HourlyApiModel): List<HourlyWeatherItem> {
-        return response.time.mapIndexed { index, time ->
+        return response.time.filterIndexed { index, _ ->  index < 24}.mapIndexed { index, time ->
             HourlyWeatherItem(
-                hour = time,
+                hour = time.split(":")[0].split("T")[1],
                 celsius = response.temperature[index].toString(),
                 image = ""
             )

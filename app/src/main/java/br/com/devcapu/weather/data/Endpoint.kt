@@ -16,4 +16,7 @@ interface Endpoint {
         @Query("latitude") latitude: String,
         @Query("longitude") longitude: String,
     ): Call<WeatherApiModel>
+
+    @GET("search")
+    fun search(@Query("name") name: String)
 }
