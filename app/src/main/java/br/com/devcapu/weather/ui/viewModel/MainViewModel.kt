@@ -2,6 +2,7 @@ package br.com.devcapu.weather.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.devcapu.weather.data.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -30,15 +31,7 @@ class MainViewModel: ViewModel() {
 
     init {
         viewModelScope.launch {
-            _uiState.value = MainUiState(
-                city = "Rio de Janeiro",
-                celsius = "33",
-                date = "24/08/2022",
-                time = "12:31",
-                sensation = 22,
-                humidity = 12,
-                airPressure = 999
-            )
+            WeatherRepository().searchForWeather { _uiState.value = it }
         }
     }
 
