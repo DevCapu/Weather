@@ -16,7 +16,8 @@ data class HourlyApiModel(
     @SerializedName("temperature_2m") val temperature: List<Float>,
     @SerializedName("apparent_temperature") val temperatureSensation: List<Float>,
     @SerializedName("relativehumidity_2m") val humidity: List<Float>,
-    @SerializedName("pressure_msl") val airPressures: List<Float>
+    @SerializedName("pressure_msl") val airPressures: List<Float>,
+    @SerializedName("weathercoe") val weatherCode: List<WeatherCode>
 )
 
 data class CurrentWeather(
@@ -26,3 +27,7 @@ data class CurrentWeather(
     val windspeed: Float,
     val winddirection: Int,
 )
+
+enum class WeatherCode {
+
+}
