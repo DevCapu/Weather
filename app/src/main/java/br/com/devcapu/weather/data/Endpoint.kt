@@ -5,10 +5,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-
 interface Endpoint {
     @GET("forecast?" +
-            "hourly=temperature_2m,relativehumidity_2m" +
+            "hourly=temperature_2m,relativehumidity_2m,apparent_temperature,pressure_msl" +
             "&current_weather=true" +
             "&timezone=America%2FSao_Paulo"
     )

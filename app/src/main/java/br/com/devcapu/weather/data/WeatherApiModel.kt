@@ -14,7 +14,9 @@ data class WeatherApiModel(
 data class HourlyApiModel(
     val time: List<String>,
     @SerializedName("temperature_2m") val temperature: List<Float>,
-    @SerializedName("relativehumidity_2m") val humidity: List<Float>
+    @SerializedName("apparent_temperature") val temperatureSensation: List<Float>,
+    @SerializedName("relativehumidity_2m") val humidity: List<Float>,
+    @SerializedName("pressure_msl") val airPressures: List<Float>
 )
 
 data class CurrentWeather(
