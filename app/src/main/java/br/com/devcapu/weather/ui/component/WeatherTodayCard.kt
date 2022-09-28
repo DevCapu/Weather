@@ -24,7 +24,8 @@ import br.com.devcapu.weather.ui.theme.fontFamily
 fun WeatherTodayCard(
     celsius: String,
     date: String,
-    time: String
+    time: String,
+    image: Int,
 ) {
     Card(
         backgroundColor = Color(0xFF5887DD),
@@ -34,38 +35,35 @@ fun WeatherTodayCard(
             .padding(horizontal = 16.dp)
     ) {
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(24.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         ) {
             Image(
-                painterResource(id = R.drawable.sun__1_),
+                modifier = Modifier.size(96.dp),
+                painter = painterResource(id = image),
                 contentDescription = null,
-                modifier = Modifier.fillMaxWidth(0.5f)
             )
 
             Column(
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = "$date | $time",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.ExtraLight,
                     textAlign = TextAlign.Center,
-                    fontFamily = fontFamily,
-                    modifier = Modifier.fillMaxWidth()
+                    fontFamily = fontFamily
                 )
                 Text(
                     text = "$celsius°C",
                     fontSize = 40.sp,
                     fontWeight = FontWeight.ExtraLight,
                     textAlign = TextAlign.Center,
-                    fontFamily = fontFamily,
-                    modifier = Modifier.fillMaxWidth()
+                    fontFamily = fontFamily
                 )
             }
         }
@@ -83,7 +81,8 @@ fun WeatherTodayCardPreview() {
         WeatherTodayCard(
             date = "27/09/2022",
             time = "16:20",
-            celsius = "33"
+            celsius = "33",
+            image = R.drawable.storm
         )
     }
 }

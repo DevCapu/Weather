@@ -15,13 +15,14 @@ data class MainUiState(
     val sensation : Int = 0,
     val humidity: Int = 0,
     val airPressure: Int = 0,
-    val hourlyWeather: List<HourlyWeatherItem> = emptyList()
+    val hourlyWeather: List<HourlyWeatherItem> = emptyList(),
+    val image: Int? = null
 )
 
 data class HourlyWeatherItem(
     val hour: String,
-    val celsius: String,
-    val image: String
+    val celsius: Int,
+    val image: Int
 )
 
 class MainViewModel: ViewModel() {

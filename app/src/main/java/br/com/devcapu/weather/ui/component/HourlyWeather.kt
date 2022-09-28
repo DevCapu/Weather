@@ -40,7 +40,7 @@ private fun HourlyWeatherCard(hourlyItem: HourlyWeatherItem) {
             )
             Image(
                 modifier = Modifier.size(64.dp),
-                painter = painterResource(id = R.drawable.sun),
+                painter = painterResource(id = hourlyItem.image),
                 contentDescription = null
             )
             Text(
@@ -63,18 +63,18 @@ private fun HourlyWeatherListPreview() {
             listOf(
                 HourlyWeatherItem(
                     hour = "15",
-                    celsius = "23",
-                    "bla"
+                    celsius = 23,
+                    R.drawable.sun
                 ),
                 HourlyWeatherItem(
                     hour = "16",
-                    celsius = "23",
-                    "bla"
+                    celsius = 23,
+                    R.drawable.sun
                 ),
                 HourlyWeatherItem(
                     hour = "17",
-                    celsius = "23",
-                    "bla"
+                    celsius = 23,
+                    R.drawable.sun
                 )
             )
         )
@@ -91,8 +91,8 @@ private fun HourlyWeatherCardPreview() {
     WeatherTheme {
         HourlyWeatherCard( HourlyWeatherItem(
             hour = "15",
-            celsius = "23",
-            "bla"
+            celsius = 23,
+            R.drawable.sun
         ))
     }
 }

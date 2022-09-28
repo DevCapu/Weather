@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import br.com.devcapu.weather.R
 import br.com.devcapu.weather.ui.component.*
 import br.com.devcapu.weather.ui.theme.WeatherTheme
 import br.com.devcapu.weather.ui.viewModel.MainUiState
@@ -40,7 +41,8 @@ private fun MainScreenContent(uiState: MainUiState) {
                 WeatherTodayCard(
                     date = uiState.date,
                     time = uiState.time,
-                    celsius = uiState.celsius
+                    celsius = uiState.celsius,
+                    image = uiState.image ?: R.drawable.sun
                 )
             }
 
