@@ -3,7 +3,7 @@ package br.com.devcapu.weather.data
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class WeatherApiModel(
+data class ForecastApiModel(
     val latitude: Float,
     val longitude: Float,
     val elevation: Float,
@@ -17,7 +17,7 @@ data class HourlyApiModel(
     @SerializedName("apparent_temperature") val temperatureSensation: List<Float>,
     @SerializedName("relativehumidity_2m") val humidity: List<Float>,
     @SerializedName("pressure_msl") val airPressures: List<Float>,
-    @SerializedName("weathercoe") val weatherCode: List<WeatherCode>
+    @SerializedName("weathercode") val weatherCode: List<WeatherCode>
 )
 
 data class CurrentWeather(

@@ -2,7 +2,6 @@ package br.com.devcapu.weather.data
 
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface Endpoint {
@@ -14,7 +13,7 @@ interface Endpoint {
     fun getWeather(
         @Query("latitude") latitude: String,
         @Query("longitude") longitude: String,
-    ): Call<WeatherApiModel>
+    ): Call<ForecastApiModel>
 
     @GET("search")
     fun search(@Query("name") name: String)
